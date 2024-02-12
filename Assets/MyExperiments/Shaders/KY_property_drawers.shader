@@ -2,7 +2,13 @@ Shader "KY/KY_property_drawers"
 {
     Properties
     {
+        [Header(HEADER PROPERTIES)]
         _MainTex ("Texture", 2D) = "white" {}
+        [Toggle] _Toggle ("Toggle", Float) = 0
+        [KeywordEnum (Off, Red, Blue)] _KeywordEnum ("KeywordEnum", Float) = 0
+        [Enum(Off, 0, On, 1)] _Enum ("Enum", Float) = 0
+        [PowerSlider(3.0)] _PowerSlider ("PowerSlider", Range(0,1)) = 0
+        [IntRange] _IntRange ("IntRange", Range(0, 255)) = 0
     }
     SubShader
     {
@@ -16,6 +22,9 @@ Shader "KY/KY_property_drawers"
             #pragma fragment frag
             // make fog work
             #pragma multi_compile_fog
+            // use shader variants to compile more than one feature for a shader
+            #pragma shader_feature _TOGGLE_ON
+            #pragma multi_compile _KEYWORDENUM_OFF KEYWORDENUM_RED _KEYWORDENUM_BLUE
 
             #include "UnityCG.cginc"
 
@@ -34,6 +43,9 @@ Shader "KY/KY_property_drawers"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            // in case of PowerSlider and IntRange, need connection variables
+            float _PowerSlider;
+            int _IntRange;
 
             v2f vert (appdata v)
             {
