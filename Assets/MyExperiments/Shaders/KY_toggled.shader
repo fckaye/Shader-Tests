@@ -1,4 +1,4 @@
-Shader "USB/USB_toggled"
+Shader "KY/KY_toggled"
 {
     Properties
     {
