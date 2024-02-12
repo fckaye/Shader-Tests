@@ -2,9 +2,10 @@ Shader "KY/KY_toggled"
 {
     Properties
     {
+        _MainTex("Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
         // Declare drawer Toggle
-        [Toggle] _Enable ("Enable ?", Float) = 0
+        [Toggle] _Enable ("Enable ?", Float) = 1
     }
     SubShader
     {
@@ -20,7 +21,6 @@ Shader "KY/KY_toggled"
             #pragma fragment frag
             // make fog work
             #pragma multi_compile_fog
-            
             #pragma shader_feature _ENABLE_ON
 
             #include "UnityCG.cginc"
@@ -40,6 +40,7 @@ Shader "KY/KY_toggled"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float4 _Color;
 
             v2f vert (appdata v)
             {
@@ -50,8 +51,6 @@ Shader "KY/KY_toggled"
                 return o;
             }
             
-            float4 _Color;
-
             half4 frag(v2f i) : SV_Target
             {
                 half4 col = tex2D(_MainTex, i.uv);
