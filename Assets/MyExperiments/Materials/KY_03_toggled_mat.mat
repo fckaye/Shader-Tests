@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: toggled_mat
+  m_Name: KY_03_toggled_mat
   m_Shader: {fileID: 4800000, guid: ce779ac7869abd342abd518fa29c2203, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

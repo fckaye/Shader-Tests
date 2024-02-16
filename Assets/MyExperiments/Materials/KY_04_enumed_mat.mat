@@ -7,13 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: property_drawers
-  m_Shader: {fileID: 4800000, guid: 9c2e905843e2c8742b17153fbef86624, type: 3}
+  m_Name: KY_04_enumed_mat
+  m_Shader: {fileID: 4800000, guid: 66387610bbedb3e478c76954f94e7bdb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _KEYWORDENUM_OFF
-  - _TOGGLE_ON
+  - _OPTIONS_GREEN
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -46,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 20f9b7961572e484fb03a2869d79c05b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3f0f7537885fade4fb4b3de0e17ac181, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -67,21 +66,17 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Enum: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IntRange: 0
-    - _KeywordEnum: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Options: 3
     - _Parallax: 0.02
-    - _PowerSlider: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Toggle: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

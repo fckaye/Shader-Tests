@@ -1,7 +1,24 @@
-Shader "Unlit/KY_06_powerslider"
+Shader "KY/KY_06_powerslider"
 {
     Properties
     {
+        [Header(My own properties)]
+        [Space(25)]
+        [PowerSlider(3.0)] 
+        _Brightness("Brightness", Range(0.01, 1)) = 0.08
+        [Space(25)]
+        [IntRange]
+        _Samples("Samples", Range(0,255)) = 100
+        
+        [Header(Specular properties)]
+        [Space(20)]
+        _Specularity("Specularity", Range(0.01, 1)) = 0.08
+        _Brightness2("Brightness2", Range(0.01, 1)) = 0.08
+        _SpecularColor("Specular Color", Color) = (1, 1, 1, 1)
+        
+        [Space(20)]
+        [Header(Texture properties)]
+        [Space(20)]
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
@@ -34,6 +51,9 @@ Shader "Unlit/KY_06_powerslider"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            // generate connection variables
+            float _Brightness;
+            int _Samples;
 
             v2f vert (appdata v)
             {
