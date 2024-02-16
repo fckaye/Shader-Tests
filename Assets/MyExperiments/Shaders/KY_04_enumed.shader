@@ -1,27 +1,26 @@
-Shader "KY/KY_toggled"
+Shader "KY/KY_04_enumed"
 {
     Properties
     {
-        _MainTex("Texture", 2D) = "white" {}
-        _Color("Color", Color) = (1,1,1,1)
-        // Declare drawer Toggle
-        [Toggle] _Enable ("Enable ?", Float) = 1
+        // Declare toggle options
+        [KeywordEnum(Off, Red, Blue, Green)]
+        _Options("Color Options", Float) = 0
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Tags {"RenderType" = "Opaque"}
+        Tags { "RenderType"="Opaque" }
         LOD 100
-        
+
         Pass
         {
             CGPROGRAM
-
-            // Declare pragma
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
             #pragma multi_compile_fog
-            #pragma shader_feature _ENABLE_ON
+            // Declare pragma and conditions
+            #pragma multi_compile _OPTIONS_OFF _OPTIONS_RED _OPTIONS_BLUE _OPTIONS_GREEN
 
             #include "UnityCG.cginc"
 
@@ -40,25 +39,28 @@ Shader "KY/KY_toggled"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float4 _Color;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o, o.vertex);
+                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
-            
+
             half4 frag(v2f i) : SV_Target
             {
                 half4 col = tex2D(_MainTex, i.uv);
-                // Generate condition
-                #if _ENABLE_ON
+
+                #if _OPTIONS_OFF
                     return col;
-                #else
-                    return col * _Color;
+                #elif _OPTIONS_RED
+                    return col * float4(1, 0, 0, 1);
+                #elif _OPTIONS_BLUE
+                    return col * float4(0, 0, 1, 1);
+                #elif _OPTIONS_GREEN
+                    return col * float4(0, 1, 0, 1);
                 #endif
             }
             ENDCG

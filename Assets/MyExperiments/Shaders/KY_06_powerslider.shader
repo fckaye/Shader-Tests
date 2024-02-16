@@ -1,18 +1,12 @@
-Shader "KY/KY_simple_color"
+Shader "Unlit/KY_06_powerslider"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1, 1, 1, 1)
     }
     SubShader
     {
-        Tags 
-        { 
-            "RenderType"="Transparent"
-            "Queue"="Transparent" 
-        }
-        Blend SrcAlpha OneMinusSrcAlpha
+        Tags { "RenderType"="Opaque" }
         LOD 100
 
         Pass
@@ -40,7 +34,6 @@ Shader "KY/KY_simple_color"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float4 _Color;
 
             v2f vert (appdata v)
             {
@@ -51,13 +44,13 @@ Shader "KY/KY_simple_color"
                 return o;
             }
 
-            // 2. use function
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
+                // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                return col * _Color;
+                return col;
             }
             ENDCG
         }
