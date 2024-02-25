@@ -42,12 +42,10 @@ public class RadialTrigger : MonoBehaviour
 
         if (sign == -1 || sign == 0)
         {
-            Debug.Log("We are inside the explotion radius");
             return true;
         }
         else
         {
-            Debug.Log("We are outside the explotion radius");
             return false;
         }
     }
