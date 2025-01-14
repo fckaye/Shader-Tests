@@ -1,37 +1,21 @@
-Shader "USB/USB_blending"
+Shader "KY/KY_08_blending"
 {
     Properties
     {
+        [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Source Factor", Float) = 1
+        [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Destination Factor", Float) = 1
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        // if you want to use transparent textures, make sure to change the RenderType and the Queue to Transparent
-        Tags 
-        { 
-            "RenderType"="Transparent" 
-            "Queue"="Transparent"
-        }        
-        // this shader is additive because its Blending is One One
-        // you can use all these Blending variables to change the final effect
-        // in case you get Z-fighting then disable the Z-Buffer / Depth Buffer by adding "ZWrite Off"
-        ZWrite Off 
+        Tags {
+            // In order to use blending, we need transparent
+            "RenderType" = "Transparent"
+            "Queue" = "Transparent"
+        }
+        LOD 100
         
-//        Blend SrcAlpha OneMinusSrcAlpha
-        Blend One One    
-//        Blend OneMinusDstColor One
-//        Blend DstColor Zero
-//        Blend DstColor SrcColor   
-//        Blend SrcColor One
-//        Blend OneMinusSrcColor One
-//        Blend Zero OneMinusSrcColor
-
-        // by default the Blending operation is "Add" but you could use all these variables to change the final effect        
-        BlendOp Add
-//        BlendOp Sub
-//        BlendOp RevSub
-//        BlendOp Min
-//        BlendOp Max
+        Blend [_SrcBlend] [_DstBlend]
 
         Pass
         {
