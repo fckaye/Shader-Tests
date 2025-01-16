@@ -1,7 +1,7 @@
 Shader "USB/USB_alpha_to_mask"
 {
     Properties
-    {
+    {z
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
