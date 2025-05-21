@@ -7,10 +7,13 @@ Shader "KY/KY_11_front_back"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+//        Tags { "RenderType"="Opaque" }
+        Tags{ "Queue"="Transparent" "RenderType"="Transparent" }
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
         LOD 100
-        Cull Off        
-
+        Cull Off
+        
         Pass
         {
             CGPROGRAM

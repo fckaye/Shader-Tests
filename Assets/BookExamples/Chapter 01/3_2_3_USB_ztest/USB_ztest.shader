@@ -16,12 +16,12 @@ Shader "USB/USB_ztest"
         {
             // enable ZTesting for this pass by adding a ZTest operator
             ZTest Less
-            // ZTest Greater
-            // ZTest LEqual
-            // ZTest GEqual
-            // Ztest Equal
-            // ZTest NotEqual
-            // ZTest Always 
+//            ZTest Greater
+//            ZTest LEqual
+//            ZTest GEqual
+//            Ztest Equal
+//            ZTest NotEqual
+            ZTest Always 
 
             CGPROGRAM
             #pragma vertex vert
@@ -71,13 +71,13 @@ Shader "USB/USB_ztest"
         Pass
         {
             // enable ZTesting for this pass by adding a ZTest operator
-            // ZTest Less
+//            ZTest Less
             ZTest Greater
-            // ZTest LEqual
-            // ZTest GEqual
-            // Ztest Equal
-            // ZTest NotEqual
-            // ZTest Always 
+//            ZTest LEqual
+//            ZTest GEqual
+//            Ztest Equal
+//            ZTest NotEqual
+//            ZTest Always 
             
             CGPROGRAM
             #pragma vertex vert
