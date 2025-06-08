@@ -1,26 +1,22 @@
-Shader "KY/KY_01_simple_color"
+Shader "KY/KY_13_tinted_texture"
 {
-    
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        // Declare inside Properties so that _Color shows up on Unity Editor
-        _Color ("Tint", Color) = (1, 1, 1, 1)
+        _Color("Tint", Color) = (1,1,1,1)
     }
     SubShader
     {
-        Tags 
-        { 
-            "RenderType"="Transparent"
-            "Queue"="Transparent" 
+        Tags { 
+            "RenderType"="Transparent" 
+            "Queue"="Transparent"
         }
         Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
-        
+
         Pass
         {
             CGPROGRAM
-            // Allows us to use the vertex stage, see around line 50
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
@@ -41,14 +37,10 @@ Shader "KY/KY_01_simple_color"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            // Define 4 dimensions vector with same name as variable inside Properties
-            // Now we can connect _Color to things inside shader.
-            float4 _Color;
+            uniform sampler2D _MainTex;
+            uniform float4 _MainTex_ST;
+            uniform float4 _Color;
 
-            // This is the stage where verts are projected from 3D to 2D
-            // v2f = "vertex to fragment"
             v2f vert (appdata v)
             {
                 v2f o;
@@ -58,13 +50,10 @@ Shader "KY/KY_01_simple_color"
                 return o;
             }
 
-            // Fragment stage: color each individual 2D pixel
-            // 2. use function
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
+                // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
                 return col * _Color;
             }
             ENDCG
