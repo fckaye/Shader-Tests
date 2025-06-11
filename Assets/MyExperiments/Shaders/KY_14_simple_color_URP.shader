@@ -14,14 +14,16 @@ Shader "KY/KY_01_simple_color"
         Tags 
         { 
             "RenderType"="Transparent"
-            "Queue"="Transparent" 
+            "Queue"="Transparent"
+            "RenderPipeline"="UniversalRenderPipeline"
         }
         Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
         
         Pass
         {
-            CGPROGRAM
+            //Note: No CGPROGRAM, but HLSLPROGRAM
+            HLSLPROGRAM
             // Upgrade NOTE: excluded shader from DX11 because it uses wrong array syntax (type[size] name)
             #pragma exclude_renderers d3d11
             // Allows us to use the vertex stage, see around line 50
@@ -30,8 +32,8 @@ Shader "KY/KY_01_simple_color"
             // make fog work
             #pragma multi_compile_fog
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "HLSLSupport.cginc"
             
             struct appdata
             {
@@ -43,7 +45,6 @@ Shader "KY/KY_01_simple_color"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
                 float3 normal :  NORMAL;
             };
@@ -59,9 +60,8 @@ Shader "KY/KY_01_simple_color"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = TransformObjectToHClip(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
             
@@ -93,10 +93,9 @@ Shader "KY/KY_01_simple_color"
                 // old
                 fixed4 col2 = tex2D(_MainTex, i.uv);
                 // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
                 return col2 * _Color;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }
